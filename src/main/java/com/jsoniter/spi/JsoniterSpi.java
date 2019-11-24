@@ -48,7 +48,12 @@ public class JsoniterSpi {
     }
 
     public static Config getCurrentConfig() {
-        return currentConfig.get();
+        Config config = currentConfig.get();
+        if (config == null) {
+            config = defaultConfig;
+            currentConfig.set(config);
+        }
+        return config;
     }
 
     public static void setDefaultConfig(Config val) {
